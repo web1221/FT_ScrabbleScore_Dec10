@@ -1,18 +1,27 @@
 class Word
   def initialize(word)
-    @word = word
-  end
-
-  def word
-    @word
+    @word = word.upcase()
+    @letters = @word.split('')
+    @scores = {
+      1 => /[AEIOULNRST]/,
+      2 => /[DG]/,
+      3 => /[BCMP]/,
+      4 => /[FHVWY]/,
+      5 => /[K]/,
+      8 => /[JX]/,
+      10 => /[QZ]/
+    }
   end
 
   def scrabble_score
-    string_score = word.tr("aAeEiIoOuUlLnNrRsStT", "1").tr("dDgG", "2").tr("bBcCmMpP", "3").tr("fFhHvVwWyY", "4").tr("kK", "5").tr("jJxX", "8").tr("qQzZ", "10").tr(" ", "").split('')
-    new_array = []
-    string_score.each do |string|
-      new_array.push(string.to_i())
+    score = 0
+    @letters.each do |letter|
+      @scores.each do |key, value|
+        if value =~ letter
+          score += key
+        end
+      end
     end
-    new_array.reduce(:+)
+    score
   end
 end

@@ -19,4 +19,8 @@ describe('#scrabble_score') do
     word = Word.new('Cat')
     expect(word.scrabble_score()).to(eq(5))
   end
+  it('returns a summed scrabble score') do
+    word = Word.new('Zebra')
+    expect(word.scrabble_score()).to(eq(16))
+  end
 end
